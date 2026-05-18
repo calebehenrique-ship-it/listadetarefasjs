@@ -1,4 +1,4 @@
-// Classe que representa uma tarefa
+
 class Tarefa {
     constructor(id, descricao, concluida = false) {
         this.id = id;
@@ -7,15 +7,12 @@ class Tarefa {
     }
 }
 
-// Array que armazenará todas as tarefas
 let tarefas = [];
 
-// Referências aos elementos do HTML
 const tarefaInput = document.getElementById("tarefaInput");
 const btnAdicionar = document.getElementById("btnAdicionar");
 const listaTarefas = document.getElementById("listaTarefas");
 
-// Evento do botão Adicionar
 btnAdicionar.addEventListener("click", () => {
     const descricao = tarefaInput.value.trim();
 
@@ -30,9 +27,8 @@ btnAdicionar.addEventListener("click", () => {
     tarefaInput.focus();
 });
 
-// Cria uma nova tarefa
 function criarTarefa(descricao) {
-    const id = Date.now(); // Gera um ID único
+    const id = Date.now(); 
     const novaTarefa = new Tarefa(id, descricao);
 
     tarefas.push(novaTarefa);
@@ -40,14 +36,14 @@ function criarTarefa(descricao) {
     listarTarefas();
 }
 
-// Remove uma tarefa pelo ID
+
 function deletarTarefa(id) {
     tarefas = tarefas.filter(tarefa => tarefa.id !== id);
 
     listarTarefas();
 }
 
-// Atualiza a descrição de uma tarefa
+
 function atualizarTarefa(id, novaDescricao) {
     const tarefa = tarefas.find(t => t.id === id);
 
@@ -57,7 +53,7 @@ function atualizarTarefa(id, novaDescricao) {
     }
 }
 
-// Alterna entre concluída e pendente
+
 function atualizarStatus(id) {
     const tarefa = tarefas.find(t => t.id === id);
 
@@ -67,33 +63,28 @@ function atualizarStatus(id) {
     }
 }
 
-// Lista as tarefas na tela
 function listarTarefas(lista = tarefas) {
     listaTarefas.innerHTML = "";
 
     lista.forEach(tarefa => {
         const li = document.createElement("li");
 
-        // Texto da tarefa
+        
         li.textContent = tarefa.descricao;
 
-        // Se concluída, aplica estilo
         if (tarefa.concluida) {
             li.style.textDecoration = "line-through";
             li.style.opacity = "0.6";
         }
 
-        // Ao clicar, alterna status
         li.addEventListener("click", () => {
             atualizarStatus(tarefa.id);
         });
 
-        // Botão de excluir
         const btnExcluir = document.createElement("button");
         btnExcluir.textContent = "❌";
         btnExcluir.style.marginLeft = "10px";
 
-        // Impede que o clique no botão também marque a tarefa
         btnExcluir.addEventListener("click", (event) => {
             event.stopPropagation();
             deletarTarefa(tarefa.id);
@@ -104,7 +95,6 @@ function listarTarefas(lista = tarefas) {
     });
 }
 
-// Filtra as tarefas
 function filtrarTarefa(tipo) {
     if (tipo === "todas") {
         listarTarefas(tarefas);
@@ -116,12 +106,11 @@ function filtrarTarefa(tipo) {
         listarTarefas(pendentes);
     }
 }
-// Seleciona os botões de filtro
+
 const filtroTodas = document.getElementById("filtroTodas");
 const filtroPendentes = document.getElementById("filtroPendentes");
 const filtroConcluidas = document.getElementById("filtroConcluidas");
 
-// Eventos dos botões
 filtroTodas.addEventListener("click", () => {
     filtrarTarefa("todas");
 });
