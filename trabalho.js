@@ -43,17 +43,6 @@ function deletarTarefa(id) {
     listarTarefas();
 }
 
-
-function atualizarTarefa(id, novaDescricao) {
-    const tarefa = tarefas.find(t => t.id === id);
-
-    if (tarefa) {
-        tarefa.descricao = novaDescricao;
-        listarTarefas();
-    }
-}
-
-
 function atualizarStatus(id) {
     const tarefa = tarefas.find(t => t.id === id);
 
